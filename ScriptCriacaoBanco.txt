@@ -1,0 +1,9 @@
+create Database estacionamento;
+create table hibernate_sequence (next_val bigint) engine=InnoDB
+insert into hibernate_sequence values ( 1 )
+create table tb_clientes (id bigint not null, email varchar(255), nome varchar(255), telefone varchar(255), fk_id_veiculos bigint, primary key (id)) engine=InnoDB
+create table tb_ticket (id bigint not null, data_entrada datetime(6), data_saida datetime(6) not null, vaga varchar(255) not null, valor double precision not null, fk_id_cliente bigint, primary key (id)) engine=InnoDB
+create table tb_veiculos (id bigint not null, marca varchar(255), modelo varchar(255), placa varchar(255), tipo_veiculo varchar(255), fk_id_cliente bigint, primary key (id)) engine=InnoDB
+alter table tb_clientes add constraint FK9h6eqlj1xwtn73h1ukbwsi2dc foreign key (fk_id_veiculos) references tb_veiculos (id)
+alter table tb_ticket add constraint FK3gfx01ytejqh39n3udu4iivhv foreign key (fk_id_cliente) references tb_clientes (id)
+alter table tb_veiculos add constraint FKs8o6q4hta5wv2efu2kstn6t4q foreign key (fk_id_cliente) references tb_clientes (id)
